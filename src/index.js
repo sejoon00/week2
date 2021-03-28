@@ -1,17 +1,47 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './style.css';
+class Fetch extends React.Component{
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+ 
+render(){
+  return(
+    <div>
+      
+      <div className="contextBox">
+        
+      </div>
+      <p >hi</p>
+    </div>
+    
+  )
+ }
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+function createHTMLString(item){
+  return `
+  <div className="contextBox" style="background-color: white;
+  width: 720px;
+  height: 140px;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 200px;
+  ">
+    <div><strong>User</strong>     ${item['id']}</div>
+    <div><strong>Title</strong>    ${item['title']}</div>
+    <div><strong>Body</strong>     ${item['body']}</div>
+  </div>
+  `
+}
+
+fetch('https://jsonplaceholder.typicode.com/posts/')
+.then((response) => response.json())
+.then((json) =>{
+  let filterId = json.filter( (json) => json.userId == "1");
+  let contextBox = document.querySelector('.contextBox');
+
+    contextBox.innerHTML = filterId.map( item => createHTMLString(item)).join('');
+}
+)
+
+ReactDOM.render(<Fetch />, document.getElementById('root'));

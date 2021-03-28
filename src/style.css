@@ -1,0 +1,11 @@
+body{
+    background-color: #E5E5E5;
+    height: 100%;
+}
+.container{
+    flex-flow: column;
+    align-content: center;
+}
+.contextBox{
+    
+}
